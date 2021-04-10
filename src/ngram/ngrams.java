@@ -9,7 +9,7 @@ public class ngrams {
 	/**
 	 * word to process in the nGrams Algorithm
 	 */
-	static String word = "to be or not to be";
+	static String word = "Slang";
 
 	public static void main(String[] args) {
 
@@ -21,11 +21,20 @@ public class ngrams {
 	 * @param pString String to convert to nGrams form: String
 	 * @param pInt Integer N to calculate the N gram: int
 	 * @return nGrams result as an Array of Strings: String[]
+	 * O Time complexity: T(n) = n^2, because there is a nested for for finding all strings
+	 * O Space complexity: S(n) = n, because the return array has the exact length of the needed output
+	 *  and the output is at most the size of the number of characters in the word (n).
 	 */
 	public static String[] calculateNgrams(String pString, int pInt) {
 
 		String[] split = pString.split("");
+		
+		if(split.length==1 && split[0]=="") {
+			String array[] = new String[] { "Invalid calcuation, the word is empty" };
+			return array;
+		}
 
+		
 		//Create response array with the exact lenght of the response needed
 		String[] result = new String[split.length-pInt+1];
 
@@ -54,12 +63,21 @@ public class ngrams {
 	 * @param pString String to convert to nGrams form: String
 	 * @param pInt Integer N to calculate the N gram: int
 	 * @return Most repeater nGrams word: String
+	 * O Time complexity: T(n) = n^2, because there is a nested for for finding all strings
+	 * O Space complexity: S(n) = n, because there is a hash table with access O(1), n times
+	 * Notice that there are multiple word that can meet the requirement, the out is
+	 * the first one it finds.
 	 */
 	public static String mostFrequentNGram(String pString, int pInt) {
 
 		Hashtable<String, Integer> hashtable = new Hashtable<String,Integer>();  
 
 		String[] split = pString.split("");
+		
+		if(split.length==1 && split[0]=="") {
+			String warningMessage =  "Invalid calcuation, the word is empty";
+			return warningMessage;
+		}
 
 		//Create response array with the exact lenght of the response needed
 		String[] result = new String[split.length-pInt+1];
